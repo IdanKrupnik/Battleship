@@ -1,0 +1,48 @@
+*
+{
+    box-sizing: border-box;
+}
+
+body
+{
+    background-color: #c3aed6;
+}
+
+h1#title
+{
+    font-family: 'Ranchers', cursive;
+    font-size: 3rem;
+    text-align: center;
+}
+
+h1#title:hover
+{
+    color: #394989;
+}
+
+#board
+{
+    margin: 0 auto;
+}
+
+.entry
+{
+    width: 100px;
+    height: 100px;
+}
+
+.entry:hover
+{
+    border: 2px solid red;
+}
+
+.entry__black
+{
+    background-color: black;
+    
+}
+
+.entry__white
+{
+    background-color: #e3e8e3;
+}
