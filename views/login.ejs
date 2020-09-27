@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= gameTitle %></title>
+
+    <link rel="stylesheet" href="/login.css">
 </head>
 <body>
-    
+    <form class="box" action="/login" method="POST" autocomplete="off">
+        <h1>Login</h1>
+        <input type="text" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
 </body>
 </html>
