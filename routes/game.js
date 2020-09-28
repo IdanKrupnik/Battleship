@@ -3,7 +3,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     const templateParameters = {
-        gameTitle: 'Battleship'
+        gameTitle: 'Battleship',
+        message: ''
     }
 
     res.render('index', templateParameters);

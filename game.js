@@ -1,14 +1,16 @@
 //Core
 const path = require('path');
+const bodyParser = require('body-parser');
+
 
 //Custom
 const express = require('express');
-const users = require('./models/users');
 const gameRouter = require('./routes/game');
 const loginRouter = require('./routes/login');
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const publicDirectoryPath = path.join(__dirname, '/public');
 app.use(express.static(publicDirectoryPath));
@@ -23,11 +25,6 @@ registerAppRouters([
     loginRouter
 ]);
 
-const usersModel = users.getUsersInstance();
-usersModel.getAllUsers()
-    .then(users => {
-        console.log(users);
-    });
 
 const port = 8080;
 app.listen(port, () => {
@@ -42,10 +39,7 @@ function setTemplatingEngine({ templateEngineName = 'ejs', viewsFolderName = 'vi
 
 function registerAppRouters(routersArray) {
 
-    if (!Array.isArray(routersArray)) {
-        console.log('Method must accept an array');
-        return;
-    }
+    if (!Array.isArray(routersArray)) return;
 
     for (let i = 0; i < routersArray.length; i++) {
         app.use(routersArray[i]);

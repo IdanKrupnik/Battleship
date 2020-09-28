@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,66 +11,156 @@
 
     <!-- Custom scripts -->
     <script src="/index.js" defer></script>
-    
+
 </head>
 
 <body>
+    <% if(message) { %>
+    <div class="message-alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <%= message %>
+    </div>
+    <% } %>
     <h1 id="title"><%= gameTitle %></h1>
     <table id="board">
         <tbody>
             <tr>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
             </tr>
             <tr>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
             </tr>
             <tr>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
             </tr>
             <tr>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
             </tr>
             <tr>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
             </tr>
             <tr>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
-                <td><div class="entry"></div></td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
+                <td>
+                    <div class="entry"></div>
+                </td>
             </tr>
         </tbody>
     </table>

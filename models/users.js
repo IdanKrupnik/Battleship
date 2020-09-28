@@ -33,6 +33,23 @@ class Users {
     updateUser(user) {
 
     }
+
+    isExist(email, password, callback) {
+
+        this.#database.executeQuery('SELECT * FROM users WHERE email = ? AND password = ?', [email, password])
+            .then(result => {
+                const user = result[0];
+
+                const isExist = user ? true : false;
+
+                callback(isExist);
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
 }
 
 //Implementing singleton pattern

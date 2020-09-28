@@ -12,8 +12,8 @@ module.exports = class MySqlDB {
         this.#pool = mysql.createPool(connectionProperties);
     }
 
-    executeQuery(queryString) {
-        return this.#pool.promise().execute(queryString);
+    executeQuery(queryString, parametersArray) {
+        return this.#pool.promise().execute(queryString, parametersArray);
     }
 
 } 
