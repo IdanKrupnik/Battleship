@@ -21,6 +21,8 @@ router.post('/login', (req, res) => {
             gameTitle: 'Battleship',
             message: 'You are logged in'
         }
+
+        req.session.isLoggedIn = true;
         res.render('index', templateParameters);
     }))
     

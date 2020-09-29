@@ -1,27 +1,38 @@
 
-//TODO: create a board class
-//TODO: create a submarine class
+const $board1 = document.querySelector('table#board1');
+const $board2 = document.querySelector('table#board2');
 
-const $board = document.querySelector('table#board');
+const MAX_ROWS = 10;
+const MAX_COLS = 10;
 
-function setBoardStyles()
-{
-    for(let rowIndex = 0; rowIndex < $board.rows.length; rowIndex++){
-        for(let cellIndex = 0; cellIndex < $board.rows[rowIndex].cells.length; cellIndex++) {
-            if(cellIndex % 2 === 0) 
-                $board.rows[rowIndex].cells[cellIndex].classList.add('entry__black');
-            else 
-                $board.rows[rowIndex].cells[cellIndex].classList.add('entry__white');
-            
+function createBoard(board) {
+    for (let row = 0; row < MAX_ROWS; row++) {
+        let newRow = board.querySelector('tbody').insertRow(row)
+        for (let col = 0; col < MAX_COLS; col++) {
+            let newCell = newRow.insertCell(col);
+            newCell.classList.add(`entry`);
+            newCell.classList.add(`entry-${row}-${col}`);
+            newCell.classList.add('entry-disabled');
+            newCell.setAttribute('onclick', `cellClickedHandler(${row + 1}, ${col + 1})`);
         }
     }
 }
 
-function initBoard()
-{
-    
-    setBoardStyles();
-    //placeSubmarinesOnBoard()
-} 
+createBoard($board1);
+createBoard($board2);
 
-initBoard();
+function makeBoardReactive(board) {
+
+    for (let row = 0; row < MAX_ROWS; row++) {
+        for (let col = 0; col < MAX_COLS; col++) {
+            let cell = board.querySelector('tbody').rows[row].cells[col];
+            cell.classList.remove('entry-disabled');
+        }
+    }
+}
+
+function startGame() {
+    console.log('Start');
+    makeBoardReactive($board1);
+    makeBoardReactive($board2);
+}

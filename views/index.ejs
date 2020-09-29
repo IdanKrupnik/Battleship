@@ -11,6 +11,8 @@
 
     <!-- Custom scripts -->
     <script src="/index.js" defer></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/realtime-communication.js" defer></script>
 
 </head>
 
@@ -22,148 +24,25 @@
     </div>
     <% } %>
     <h1 id="title"><%= gameTitle %></h1>
-    <table id="board">
-        <tbody>
-            <tr>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-                <td>
-                    <div class="entry"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+
+    <div class="container-center flex-container">
+        <table id="board1">
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <table id="board2">
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container-center">
+        <a href="#" onclick="startGame()" class="myButton">Start</a>
+    </div>
+
 </body>
 
 </html>

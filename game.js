@@ -1,19 +1,30 @@
 //Core
 const path = require('path');
 const bodyParser = require('body-parser');
+const http = require('http');
 
 
 //Custom
 const express = require('express');
+const session = require('express-session');
+const socketio = require('socket.io');
 const gameRouter = require('./routes/game');
 const loginRouter = require('./routes/login');
 
 const app = express();
+const httpServer = http.createServer(app);
+const io = socketio(httpServer);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const publicDirectoryPath = path.join(__dirname, '/public');
 app.use(express.static(publicDirectoryPath));
+
+app.use(session({
+    secret: 'my secret',
+    resave: false,
+    saveUninitialized: false
+}));
 
 setTemplatingEngine({
     templateEngineName: 'ejs',
@@ -26,8 +37,14 @@ registerAppRouters([
 ]);
 
 
+io.on('connection', (socket) => {
+    socket.on('cellSelected', ({row, col}) => {
+        console.log(`User chose position ${row}, ${col}`);
+    });
+});
+
 const port = 8080;
-app.listen(port, () => {
+httpServer.listen(port, () => {
     console.log(`Server is up on port ${port}`);
 });
 
