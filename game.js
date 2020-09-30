@@ -8,6 +8,7 @@ const http = require('http');
 const express = require('express');
 const session = require('express-session');
 const socketio = require('socket.io');
+const battleship = require('./utils/Battleship');
 const gameRouter = require('./routes/game');
 const loginRouter = require('./routes/login');
 
@@ -37,11 +38,7 @@ registerAppRouters([
 ]);
 
 
-io.on('connection', (socket) => {
-    socket.on('cellSelected', ({row, col}) => {
-        console.log(`User chose position ${row}, ${col}`);
-    });
-});
+battleship.startGame(io);
 
 const port = 8080;
 httpServer.listen(port, () => {

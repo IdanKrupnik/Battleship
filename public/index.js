@@ -32,7 +32,6 @@ function makeBoardReactive(board) {
 }
 
 function startGame() {
-    console.log('Start');
     makeBoardReactive($board1);
     makeBoardReactive($board2);
 }
