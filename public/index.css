@@ -29,6 +29,24 @@ body
     flex-direction: row;
 }
 
+.flex-container-col
+{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.border-green
+{
+    border: 1.5px solid #28df99;
+}
+
+.border-red
+{
+    border: 1.5px solid #ff4b5c;
+}
+
 .closebtn 
 {
     margin-left: 15px;
@@ -41,7 +59,7 @@ body
     transition: 0.3s;
 }
   
-  .closebtn:hover 
+.closebtn:hover 
 {
     color: black;
 }
@@ -51,6 +69,26 @@ h1#title
     color: white;
     font-size: 3rem;
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.board__name
+{
+    color: white;
+    margin: 0;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+.board__name--red
+{
+    background-color: #ff4b5c;
+}
+
+.board__name--green
+{
+    background-color: #28df99;
 }
 
 #board1, #board2
@@ -58,16 +96,16 @@ h1#title
     margin: 0 auto;
 }
 
-.entry
+.board__entry
 {
     background-color: #e3e8e3;
     width: 65px;
     height: 65px;
 }
 
-.entry:hover
+.board__entry:hover
 {
-    border: 2px solid red;
+    border: 2px solid #ff4b5c;
     cursor: pointer;
 }
 

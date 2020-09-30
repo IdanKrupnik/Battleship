@@ -1,6 +1,5 @@
 const socket = io();
 
-
 function cellClickedHandler(rowPosition, colPosition) {
 
     socket.emit('cellSelected', {
