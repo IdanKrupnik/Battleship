@@ -109,6 +109,11 @@ h1#title
     cursor: pointer;
 }
 
+.board__entry:active 
+{
+    background-color: #ff4b5c;
+}
+
 .entry-disabled {
     background: gray;
 }

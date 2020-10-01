@@ -19,7 +19,11 @@ function createBoard(board) {
 }
 
 createBoard($board1);
-createBoard($board2);
+
+if($board2) createBoard($board2);
+//When the game starts there is only 1 board and its 
+//position will be centered
+else document.querySelector('.flex-container-col').style.margin = "0 auto";
 
 function makeBoardReactive(board) {
 
@@ -31,7 +35,31 @@ function makeBoardReactive(board) {
     }
 }
 
+const socket = io();
+
+function cellClickedHandler(rowPosition, colPosition) {
+
+    socket.emit('cellSelected', {
+        row: rowPosition,
+        col: colPosition,
+        memberId: +document.querySelector('#memberId').innerHTML
+    });
+}
+
 function startGame() {
     makeBoardReactive($board1);
-    makeBoardReactive($board2);
+    if($board2) makeBoardReactive($board2);
+
+    const memberId = +document.querySelector('#memberId').innerHTML;
+
+    socket.emit('join', memberId);
+
+    socket.on('roomEstablished', () => {
+        console.log('Room Established');
+    });
+
+    socket.on('opponentSelection', ({row, col}) => {
+        console.log(`Opponent chose ${row}-${col}`);
+    })
+    
 }

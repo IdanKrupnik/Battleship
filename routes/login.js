@@ -19,7 +19,9 @@ router.post('/login', (req, res) => {
     usersModel.getUsersInstance().isExist(email, password, (answer => {
         templateParameters = {
             gameTitle: 'Battleship',
-            message: 'You are logged in'
+            message: 'You are logged in',
+            foundOpponent: false,
+            memberId: ''
         }
 
         req.session.isLoggedIn = true;

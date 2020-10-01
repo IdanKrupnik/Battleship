@@ -8,18 +8,93 @@ class SocketEvent {
     }
 }
 
+class RoomManager {
+    #rooms;
+    #roomIdCounter;
+    constructor() {
+        this.#rooms = [];
+        this.#roomIdCounter = 0;
+    }
+
+    //Using the arrow function so that the value
+    //of this will not change
+    #getNewRoom = (socket, memberId) => {
+        const newRoom = {
+            roomId: this.#roomIdCounter++,
+            full: false,
+            members: [memberId],
+            player1Socket: socket,
+            player2Socket: null
+        }
+
+        return newRoom;
+    }
+
+    join(socket, memberId) {
+        for (let i = 0; i < this.#rooms.length; i++) {
+            if (!this.#rooms[i].full) {
+                this.#rooms[i].full = true;
+                this.#rooms[i].members.push(memberId);
+                this.#rooms[i].player2Socket = socket;
+
+                this.#rooms[i].player2Socket
+                    .join(this.#rooms[i].roomId);
+
+                this.#rooms[i].player1Socket
+                    .to(this.#rooms[i].roomId)
+                    .emit('roomEstablished');
+
+                this.#rooms[i].player2Socket
+                    .to(this.#rooms[i].roomId)
+                    .emit('roomEstablished');
+
+                return;
+            }
+        }
+        const newRoom = this.#getNewRoom(socket, memberId);
+        newRoom.player1Socket.join(newRoom.roomId);
+        this.#rooms.push(newRoom);
+    }
+
+    sendMessageToRoomOfMember(memberId, eventName, message) {
+        for (let i = 0; i < this.#rooms.length; i++) {
+            if (this.#rooms[i].members.includes(memberId)) {
+                this.#rooms[i].player1Socket
+                    .to(this.#rooms[i].roomId)
+                    .emit(eventName, message);
+
+                this.#rooms[i].player2Socket
+                    .to(this.#rooms[i].roomId)
+                    .emit(eventName, message);
+            }
+        }
+    }
+
+}
+
 class BattleshipRealtimeCommunication {
+    #roomManager;
+
     constructor(socketioInstance, socketEventList) {
         this.socketioInstance = socketioInstance;
         this.registerEvents(socketEventList);
+        this.#roomManager = new RoomManager();
+
     }
 
     registerEvents(socketEventList) {
 
         this.socketioInstance.on('connection', (socket) => {
+
+            socket.on('join', (memberId) => {
+
+                this.#roomManager.join(socket, memberId);
+
+            })
+
             for (let i = 0; i < socketEventList.length; i++) {
                 socket.on(socketEventList[i].eventName, (data) => {
-                    socketEventList[i].handler(data);
+                    socketEventList[i].handler(this.#roomManager, data);
                 });
             }
         })
@@ -36,8 +111,12 @@ class Battleship {
 
     startGame(socketioInstance) {
         this.realtimeCommunicator = new BattleshipRealtimeCommunication(socketioInstance, [
-            new SocketEvent('cellSelected', ({ row, col }) => {
+            new SocketEvent('cellSelected', (roomManager, { row, col, memberId }) => {
                 console.log(`User chose position ${row}, ${col}`);
+                roomManager.sendMessageToRoomOfMember(memberId, 'opponentSelection', {
+                    row: row,
+                    col: col
+                });
             })
         ]);
     }
