@@ -46,9 +46,22 @@ function cellClickedHandler(rowPosition, colPosition) {
     });
 }
 
+function startTimer() {
+    const $timer = document.querySelector('.timer');
+    const START_TIME = 20;
+    $timer.innerHTML = START_TIME;
+    
+    const interval = setInterval(() => {
+        $timer.innerHTML = parseInt($timer.innerHTML) - 1;
+        if(parseInt($timer.innerHTML) === 0) clearInterval(interval);
+    }, 1000);
+}
+
 function startGame() {
     makeBoardReactive($board1);
     if($board2) makeBoardReactive($board2);
+
+    startTimer();
 
     const memberId = +document.querySelector('#memberId').innerHTML;
 

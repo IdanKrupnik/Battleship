@@ -63,9 +63,11 @@ class RoomManager {
                     .to(this.#rooms[i].roomId)
                     .emit(eventName, message);
 
-                this.#rooms[i].player2Socket
-                    .to(this.#rooms[i].roomId)
-                    .emit(eventName, message);
+                if (this.#rooms[i].player2Socket != null) {
+                    this.#rooms[i].player2Socket
+                        .to(this.#rooms[i].roomId)
+                        .emit(eventName, message);
+                }
             }
         }
     }

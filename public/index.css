@@ -8,6 +8,15 @@ body
     background-color: #4f6275;
 }
 
+.timer
+{
+    position: relative;
+    left: 2px;
+    top: 2px;
+    font-size: 2rem;
+    color: white;
+}
+
 .message-alert 
 {
     padding: 20px;
