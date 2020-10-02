@@ -5,6 +5,8 @@ const $board2 = document.querySelector('table#board2');
 const MAX_ROWS = 10;
 const MAX_COLS = 10;
 
+let isGameReady = false;
+
 function createBoard(board) {
     for (let row = 0; row < MAX_ROWS; row++) {
         let newRow = board.querySelector('tbody').insertRow(row)
@@ -13,7 +15,7 @@ function createBoard(board) {
             newCell.classList.add(`board__entry`);
             newCell.classList.add(`entry-${row}-${col}`);
             newCell.classList.add('entry-disabled');
-            newCell.setAttribute('onclick', `cellClickedHandler(${row + 1}, ${col + 1})`);
+            newCell.setAttribute('onclick', `cellClickedHandler(${row + 1}, ${col + 1}, ${board.id})`);
         }
     }
 }
@@ -48,13 +50,40 @@ function removeElementFromDOM(DOMElement) {
 
 const socket = io();
 
-function cellClickedHandler(rowPosition, colPosition) {
 
-    socket.emit('cellSelected', {
-        row: rowPosition,
-        col: colPosition,
-        memberId: +document.querySelector('#memberId').innerHTML
-    });
+const MAX_SHIPS = 10;
+let shipCounter = 0;
+
+function cellClickedHandler(rowPosition, colPosition, board) {
+    const boardBody = board.querySelector('tbody');
+    const clickedCell = boardBody
+        .rows[rowPosition - 1]
+        .cells[colPosition - 1]
+
+    const isAlreadyChosen = clickedCell.classList.contains('has-ship');
+
+    if (!isGameReady && !isAlreadyChosen && shipCounter < MAX_SHIPS) {
+
+        shipCounter++;
+
+        clickedCell
+            .style
+            .backgroundColor = 'black';
+
+        clickedCell
+            .style
+            .border = '1px solid black';
+
+        clickedCell
+            .classList.add('has-ship');
+
+    } else if(isGameReady) {
+        socket.emit('cellSelected', {
+            row: rowPosition,
+            col: colPosition,
+            memberId: +document.querySelector('#memberId').innerHTML
+        });
+    }
 }
 
 function startGame() {
@@ -79,6 +108,8 @@ function waitForPlayerShips(watingTime) {
             makeBoardUnreactive($board1);
             makeBoardReactive($board2);
             removeElementFromDOM($message);
+
+            isGameReady = true;
         }
     }, 1000);
 }
