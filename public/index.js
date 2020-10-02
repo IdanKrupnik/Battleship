@@ -19,11 +19,7 @@ function createBoard(board) {
 }
 
 createBoard($board1);
-
-if ($board2) createBoard($board2);
-//When the game starts there is only 1 board and its 
-//position will be centered
-else document.querySelector('.flex-container-col').style.margin = "0 auto";
+createBoard($board2);
 
 function makeBoardReactive(board) {
 
@@ -44,6 +40,10 @@ function makeBoardUnreactive(board) {
             cell.removeAttribute('onclick');
         }
     }
+}
+
+function removeElementFromDOM(DOMElement) {
+    DOMElement.style.display = 'none';
 }
 
 const socket = io();
@@ -67,12 +67,18 @@ function waitForPlayerShips(watingTime) {
     const START_TIME = watingTime;
     $timer.innerHTML = START_TIME;
 
+    const $message = document.createElement("div");
+    $message.innerHTML = "Please put your ships on the board";
+    $message.classList.add('message-alert');
+    document.body.insertBefore($message, $timer);
+
     const interval = setInterval(() => {
         $timer.innerHTML = parseInt($timer.innerHTML) - 1;
         if (parseInt($timer.innerHTML) === 0) {
             clearInterval(interval);
             makeBoardUnreactive($board1);
             makeBoardReactive($board2);
+            removeElementFromDOM($message);
         }
     }, 1000);
 }
