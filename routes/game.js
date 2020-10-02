@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
     const templateParameters = {
         gameTitle: 'Battleship',
         message: '',
-        foundOpponent: false,
         memberId: Members.getMemberId()
     }
 

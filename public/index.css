@@ -126,6 +126,10 @@ h1#title
 .entry-disabled {
     background: gray;
 }
+.entry-disabled:active {
+    background: gray;
+    border-style: none;
+}
 
 .entry-disabled:hover {
     cursor: not-allowed;

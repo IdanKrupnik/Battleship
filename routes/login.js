@@ -20,7 +20,6 @@ router.post('/login', (req, res) => {
         templateParameters = {
             gameTitle: 'Battleship',
             message: 'You are logged in',
-            foundOpponent: false,
             memberId: ''
         }
 
