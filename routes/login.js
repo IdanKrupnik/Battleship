@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router();
 
 const usersModel = require('../models/users');
 
@@ -17,17 +17,21 @@ router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
     usersModel.getUsersInstance().isExist(email, password, (answer => {
-        templateParameters = {
-            gameTitle: 'Battleship',
-            message: 'You are logged in',
-            memberId: ''
-        }
+        if (!answer) {
+            res.render('login', {
+                gameTitle: 'Battleship'
+            })
+        } else {
+            templateParameters = {
+                gameTitle: 'Battleship',
+                message: 'You are logged in',
+                memberId: ''
+            }
 
-        req.session.isLoggedIn = true;
-        res.render('index', templateParameters);
+            req.session.isLoggedIn = true;
+            res.render('index', templateParameters);
+        }
     }))
-    
-    
 })
 
 module.exports = router;

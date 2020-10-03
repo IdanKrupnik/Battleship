@@ -38,9 +38,7 @@ class Users {
 
         this.#database.executeQuery('SELECT * FROM users WHERE email = ? AND password = ?', [email, password])
             .then(result => {
-                const user = result[0];
-
-                const isExist = user ? true : false;
+                const isExist = result[0].length > 0 ? true : false;
 
                 callback(isExist);
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battleship</title>
+    <title><%= gameTitle %></title>
 
     <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/index.css">
@@ -18,6 +18,26 @@
 <body>
     <div id="memberId" style="display: none;"><%= memberId %></div>
 
+    <div class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <div class="nav-title">
+                Battleship
+            </div>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+
+        <div class="nav-links">
+            <a href="/login">Login</a>
+        </div>
+    </div>
+
     <div class="timer"></div>
 
     <% if(message) { %>
@@ -26,12 +46,11 @@
         <%= message %>
     </div>
     <% } %>
-    <h1 id="title"><%= gameTitle %></h1>
 
     <div class="container-center flex-container">
 
         <div class="flex-container-col border-green">
-            <h1 class="board__name board__name--green">You</h1>
+            <h1 class="board__name board__name--green">Me</h1>
             <table id="board1">
                 <tbody>
 
@@ -50,7 +69,7 @@
     </div>
 
     <div class="container-center">
-        <a href="#" onclick="startGame()" class="myButton">Start</a>
+        <a href="#" onclick="startGame()" class="startButton">Start</a>
     </div>
 
 </body>

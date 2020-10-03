@@ -77,7 +77,7 @@ function cellClickedHandler(rowPosition, colPosition, board) {
         clickedCell
             .classList.add('has-ship');
 
-    } else if(isGameReady) {
+    } else if (isGameReady) {
         socket.emit('cellSelected', {
             row: rowPosition,
             col: colPosition,
@@ -88,11 +88,14 @@ function cellClickedHandler(rowPosition, colPosition, board) {
 
 function startGame() {
     makeBoardReactive($board1);
+    const $startButton = document.querySelector('a.startButton'); 
+    removeElementFromDOM($startButton);
     searchOnlineRoom();
 }
 
 function waitForPlayerShips(watingTime) {
     const $timer = document.querySelector('.timer');
+    const memberId = +document.querySelector('#memberId').innerHTML;
     const START_TIME = watingTime;
     $timer.innerHTML = START_TIME;
 
@@ -109,6 +112,8 @@ function waitForPlayerShips(watingTime) {
             makeBoardReactive($board2);
             removeElementFromDOM($message);
 
+            sendBoardStateToServer($board1, memberId);
+
             isGameReady = true;
         }
     }, 1000);
@@ -124,8 +129,16 @@ function searchOnlineRoom() {
         waitForPlayerShips(20);
     });
 
+    socket.on('hit', ({ row, col }) => {
+        console.log(`Opponent hit at position [${row}-${col}]`);
+    });
+
     socket.on('opponentSelection', ({ row, col }) => {
         console.log(`Opponent chose ${row}-${col}`);
     })
 
+}
+
+function sendBoardStateToServer(board, memberId) {
+    socket.emit('boardIsReady', board, memberId);
 }
