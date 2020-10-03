@@ -7,7 +7,7 @@ module.exports = class MySqlDB {
         host: 'localhost',
         user: 'root',
         database: 'battleship',
-        password: '7869'
+        password: '<Your password>'
     }) {
         this.#pool = mysql.createPool(connectionProperties);
     }
